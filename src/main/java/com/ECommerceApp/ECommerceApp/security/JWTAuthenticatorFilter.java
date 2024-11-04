@@ -23,11 +23,15 @@ public class JWTAuthenticatorFilter extends OncePerRequestFilter {
 
     // private finall, add in constructor
     @Autowired
-    private JWTGenerator generator;
+    private  JWTGenerator generator;
 
     @Autowired
-    private CustomerDetailsService customerDetailsService;
+    private  CustomerDetailsService customerDetailsService;
 
+//    public JWTAuthenticatorFilter(JWTGenerator generator, CustomerDetailsService customerDetailsService) {
+//        this.generator = generator;
+//        this.customerDetailsService = customerDetailsService;
+//    }
 
 
     @Override

@@ -18,9 +18,15 @@ public class CartContent {
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
     private int id;
 
-    @OneToMany(mappedBy = "cartContent")
-    private List<Product> products;
+    @OneToOne(mappedBy = "cartContent")
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product product;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart_id", referencedColumnName = "id")
+    private Cart cart;
 
+    @Column(name = "quantity", nullable = false, length = 50, updatable = true)
+    private Integer quantity;
 
 }

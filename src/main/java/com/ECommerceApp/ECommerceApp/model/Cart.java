@@ -20,15 +20,13 @@ public class Cart {
     @Column(name = "ID", unique = true, updatable = false)
     private int id;
 
-//    @OneToMany(fetch = FetchType.LAZY) //delete from here mappedBy
-//    @JoinColumn(name = "product_id", referencedColumnName = "id")
-//    private List<Product> products;
+    @OneToMany(targetEntity = CartContent.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "cart")
+    //@JoinColumn(name = "cart_content_id", referencedColumnName = "id")
+    private List<CartContent> cartContent = new ArrayList<>();
 
     @JsonIgnore // without this I would get recursively the customer with his attributes including cart and so on
     @OneToOne(fetch = FetchType.LAZY, targetEntity = Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id") //or maybe new customer_id
     private Customer customer;
 
-    @Column(name = "QUANTITY")
-    private int quantity;
 }

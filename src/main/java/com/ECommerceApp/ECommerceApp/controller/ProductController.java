@@ -1,10 +1,12 @@
 package com.ECommerceApp.ECommerceApp.controller;
 import com.ECommerceApp.ECommerceApp.model.Cart;
+import com.ECommerceApp.ECommerceApp.model.CartContent;
 import com.ECommerceApp.ECommerceApp.model.Customer;
 import com.ECommerceApp.ECommerceApp.model.Product;
 import com.ECommerceApp.ECommerceApp.repository.CartRepository;
 import com.ECommerceApp.ECommerceApp.repository.CustomerRepository;
 import com.ECommerceApp.ECommerceApp.repository.ProductRepository;
+import com.ECommerceApp.ECommerceApp.response.GenericResponse;
 import com.ECommerceApp.ECommerceApp.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -48,26 +50,13 @@ public class ProductController {
         return productServiceImpl.createProduct(product);
     }
 
-    @PostMapping("/product/{productId}/cart")
-    public Cart addProductToCart(@PathVariable String productId) {
+    @PostMapping("/product/{productId}/{quantity}/cart")
+    public GenericResponse<CartContent> addProductToCart(@PathVariable String productId, @PathVariable int quantity) {
         Authentication authenticationToken = SecurityContextHolder.getContext().getAuthentication();
         User user = (User)authenticationToken.getPrincipal();
-        Customer customer = customerRepository.findByEmail( user.getUsername()).orElse(null);
-        Cart cart = new Cart();
-        //I don't have cart customer relationship...,
-        // when create customer, add cart to its list
-        if (customer != null) {
-            cart = customer.getCart();
-            Product product = productRepository.findById(Integer.parseInt(productId));
-            List<Cart> carts = new ArrayList<>();
-            carts.add(cart);
-            product.setCart(carts);
-            productRepository.save(product);
+        CartContent content =  productServiceImpl.addProductToCart(user, productId, quantity);
 
-        }
-        return cart;
-
-        //return productServiceImpl.addProductToCart(productId, custom);
+        return GenericResponse.success(content, "Product successfully added to the cart");
     }
 
 }
