@@ -1,20 +1,17 @@
 package com.ECommerceApp.ECommerceApp.controller;
-import com.ECommerceApp.ECommerceApp.model.Cart;
 import com.ECommerceApp.ECommerceApp.model.CartContent;
-import com.ECommerceApp.ECommerceApp.model.Customer;
 import com.ECommerceApp.ECommerceApp.model.Product;
 import com.ECommerceApp.ECommerceApp.repository.CartRepository;
 import com.ECommerceApp.ECommerceApp.repository.CustomerRepository;
 import com.ECommerceApp.ECommerceApp.repository.ProductRepository;
 import com.ECommerceApp.ECommerceApp.response.GenericResponse;
 import com.ECommerceApp.ECommerceApp.service.ProductServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -50,6 +47,8 @@ public class ProductController {
         return productServiceImpl.createProduct(product);
     }
 
+    //move it to cart
+    //cart is null
     @PostMapping("/product/{productId}/{quantity}/cart")
     public GenericResponse<CartContent> addProductToCart(@PathVariable String productId, @PathVariable int quantity) {
         Authentication authenticationToken = SecurityContextHolder.getContext().getAuthentication();

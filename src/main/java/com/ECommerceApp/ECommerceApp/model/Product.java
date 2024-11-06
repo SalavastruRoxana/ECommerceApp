@@ -19,14 +19,14 @@ public class Product {
     private int id;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "order_products", joinColumns = @JoinColumn(name = "product", referencedColumnName = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "order", referencedColumnName = "order_id"))
+    @JoinTable(name = "order_products", joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
     private List<Order> order;
 
 //    //or many to one???
-//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
-//   private CartContent cartContent;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+   private CartContent cartContent;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")

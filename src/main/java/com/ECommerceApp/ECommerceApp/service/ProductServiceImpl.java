@@ -38,18 +38,10 @@ public class ProductServiceImpl implements ProductService{
     }
 
     public CartContent addProductToCart(User user, String productId, int quantity) {
-        Customer customer = customerRepository.findByEmail( user.getUsername()).orElse(null);
         CartContent content = new CartContent();
         Product product = productRepository.findById(Integer.parseInt(productId));
-
         content.setProduct( product );
         content.setQuantity(quantity);
-//        if (customer != null) {
-//            List<CartContent> contentList = new ArrayList<>();
-//            contentList.add(content);
-//            //product.se(contentList);
-//            productRepository.save(product); // update product might not be needed
-//        }
 
         return content;
     }
