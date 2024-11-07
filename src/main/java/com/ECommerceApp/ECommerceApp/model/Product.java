@@ -18,16 +18,6 @@ public class Product {
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
     private int id;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "order_products", joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
-    private List<Order> order;
-
-//    //or many to one???
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-   private CartContent cartContent;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;

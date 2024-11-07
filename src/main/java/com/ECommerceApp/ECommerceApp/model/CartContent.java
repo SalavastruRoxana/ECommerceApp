@@ -18,7 +18,7 @@ public class CartContent {
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
     private int id;
 
-    @OneToOne(mappedBy = "cartContent")
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 

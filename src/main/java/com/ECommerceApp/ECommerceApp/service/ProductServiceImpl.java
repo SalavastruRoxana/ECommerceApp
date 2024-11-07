@@ -1,5 +1,6 @@
 package com.ECommerceApp.ECommerceApp.service;
 
+import com.ECommerceApp.ECommerceApp.model.Cart;
 import com.ECommerceApp.ECommerceApp.model.CartContent;
 import com.ECommerceApp.ECommerceApp.model.Customer;
 import com.ECommerceApp.ECommerceApp.model.Product;
@@ -40,6 +41,12 @@ public class ProductServiceImpl implements ProductService{
     public CartContent addProductToCart(User user, String productId, int quantity) {
         CartContent content = new CartContent();
         Product product = productRepository.findById(Integer.parseInt(productId));
+        Customer cus = customerRepository.findByEmail( user.getUsername()).orElse(null);
+        if (cus != null)
+        {
+            Cart cart = cus.getCart();
+            content.setCart(cart);
+        }
         content.setProduct( product );
         content.setQuantity(quantity);
 

@@ -1,5 +1,4 @@
 package com.ECommerceApp.ECommerceApp.controller;
-import com.ECommerceApp.ECommerceApp.exception.CustomerExceptions;
 import com.ECommerceApp.ECommerceApp.exception.CustomerNotFoundException;
 import com.ECommerceApp.ECommerceApp.model.Customer;
 import com.ECommerceApp.ECommerceApp.response.GenericResponse;
@@ -7,7 +6,6 @@ import com.ECommerceApp.ECommerceApp.service.CustomerService;
 import com.ECommerceApp.ECommerceApp.service.CustomerServiceImpl;
 import com.ECommerceApp.ECommerceApp.util.CustomerConcreteDecorator;
 import com.ECommerceApp.ECommerceApp.util.CustomerDecorator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -48,9 +46,9 @@ public class CustomerController {
     }
 
     @PatchMapping("/customer/{customerId}")
-    public GenericResponse<Customer> updateCustomer(@RequestBody Customer customer) {
-        Customer currentCustomer = customerService.getCustomer(String.valueOf(customer.getId()));
-        CustomerConcreteDecorator customerConcreteDecorator = (CustomerConcreteDecorator)customerService;
+    public GenericResponse<Customer> updateCustomer(@RequestBody Customer customer, @PathVariable String customerId) {
+        Customer currentCustomer = customerService.getCustomer(customerId);
+        CustomerConcreteDecorator customerConcreteDecorator = new CustomerConcreteDecorator();
         customerConcreteDecorator.patchCustomer(customer, currentCustomer);
         customerService.updateCustomer(currentCustomer);
         return GenericResponse.success(currentCustomer, "Customer updated successfully");
