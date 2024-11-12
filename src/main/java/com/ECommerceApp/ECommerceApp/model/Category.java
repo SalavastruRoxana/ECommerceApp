@@ -1,5 +1,6 @@
 package com.ECommerceApp.ECommerceApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,8 @@ public class Category {
     private int id;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-    //@Column(name = "product_id")
+    //@JsonIgnore
+    //TODO it returns recursively
     private List<Product> products;
 
     @Column(name = "NAME", nullable = false, unique = true, updatable = false)

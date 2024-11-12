@@ -14,6 +14,7 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+
     public Iterable<Category> findAll() {
         return this.categoryRepository.findAll();
     }
@@ -21,6 +22,11 @@ public class CategoryService {
     public Category findById(int id) {
         return this.categoryRepository.findById(id);
     }
+
+    public Category findByName(String name) {
+        return this.categoryRepository.findCategoryByName(name);
+    }
+
     public void delete(int id) {
         this.categoryRepository.delete(categoryRepository.findById(id));
     }

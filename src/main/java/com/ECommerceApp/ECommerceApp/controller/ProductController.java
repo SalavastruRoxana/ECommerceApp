@@ -1,10 +1,12 @@
 package com.ECommerceApp.ECommerceApp.controller;
 import com.ECommerceApp.ECommerceApp.model.CartContent;
+import com.ECommerceApp.ECommerceApp.model.Category;
 import com.ECommerceApp.ECommerceApp.model.Product;
 import com.ECommerceApp.ECommerceApp.repository.CartRepository;
 import com.ECommerceApp.ECommerceApp.repository.CustomerRepository;
 import com.ECommerceApp.ECommerceApp.repository.ProductRepository;
 import com.ECommerceApp.ECommerceApp.response.GenericResponse;
+import com.ECommerceApp.ECommerceApp.service.CategoryService;
 import com.ECommerceApp.ECommerceApp.service.ProductServiceImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,15 +23,11 @@ public class ProductController {
 
 
     private final ProductServiceImpl productServiceImpl;
-    private final CartRepository cartRepository;
-    private final CustomerRepository customerRepository;
-    private final ProductRepository productRepository;
+    private final CategoryService categoryService;
 
-    ProductController (ProductServiceImpl productServiceImpl, CartRepository cartRepository, CustomerRepository customerRepository, ProductRepository productRepository) {
+    ProductController (ProductServiceImpl productServiceImpl, CartRepository cartRepository, CustomerRepository customerRepository, ProductRepository productRepository, CategoryService categoryService) {
         this.productServiceImpl = productServiceImpl;
-        this.cartRepository = cartRepository;
-        this.customerRepository = customerRepository;
-        this.productRepository = productRepository;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/products")
@@ -42,20 +40,20 @@ public class ProductController {
         return productServiceImpl.getProduct(productId);
     }
 
+    @GetMapping("/product/sku/{productSKU}")
+    public Product getProductBySku(@PathVariable String productSKU) {
+        return productServiceImpl.getProductBySku(productSKU);
+    }
+
+    @GetMapping("/products/category/{productCategory}")
+    public Product getProductsByCategory(@PathVariable String productCategory) {
+        Category category = categoryService.findByName(productCategory);
+        return productServiceImpl.getProductByCategory(category);
+    }
+
     @PostMapping("/product")
     public Product createProduct(@RequestBody Product product) {
         return productServiceImpl.createProduct(product);
-    }
-
-    //move it to cart
-    //cart is null
-    @PostMapping("/product/{productId}/{quantity}/cart")
-    public GenericResponse<CartContent> addProductToCart(@PathVariable String productId, @PathVariable int quantity) {
-        Authentication authenticationToken = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User)authenticationToken.getPrincipal();
-        CartContent content =  productServiceImpl.addProductToCart(user, productId, quantity);
-
-        return GenericResponse.success(content, "Product successfully added to the cart");
     }
 
 }

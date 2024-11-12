@@ -27,5 +27,4 @@ public class Cart {
     @OneToOne(fetch = FetchType.LAZY, targetEntity = Customer.class)
     @JoinColumn(name = "customer_id", referencedColumnName = "id") //or maybe new customer_id
     private Customer customer;
-
 }
