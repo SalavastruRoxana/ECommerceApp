@@ -3,7 +3,10 @@ package com.ECommerceApp.ECommerceApp.service;
 
 import com.ECommerceApp.ECommerceApp.model.Product;
 
+import java.util.List;
+
 public interface ProductService {
-    public Product createProduct(Product product);
-    public Product getProduct(String productId);
+    Product createProduct(Product product);
+    Product getProduct(String productId);
+    List<Product> getProducts();
 }

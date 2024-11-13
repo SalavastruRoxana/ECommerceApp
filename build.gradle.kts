@@ -30,12 +30,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("io.jsonwebtoken:jjwt-api")
 	implementation("io.jsonwebtoken:jjwt:0.12.6")
+	implementation ("org.springframework:spring-webmvc")
+
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl")
-
-
-
-
 
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly ("com.mysql:mysql-connector-j")
@@ -48,9 +46,6 @@ dependencies {
 	//new
 	testImplementation("com.h2database:h2:2.3.230")
 
-	//junit 4
-	testImplementation("org.junit.vintage:junit-vintage-engine:5.10.1")
-	testImplementation("org.hamcrest:hamcrest-core:2.1")
 
 
 

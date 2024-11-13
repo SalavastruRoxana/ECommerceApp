@@ -13,11 +13,9 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService{
     private final ProductRepository productRepository;
-    private final CustomerRepository customerRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository, CustomerRepository customerRepository) {
+    public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.customerRepository = customerRepository;
     }
 
 

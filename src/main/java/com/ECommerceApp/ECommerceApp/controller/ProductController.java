@@ -1,16 +1,8 @@
 package com.ECommerceApp.ECommerceApp.controller;
-import com.ECommerceApp.ECommerceApp.model.CartContent;
 import com.ECommerceApp.ECommerceApp.model.Category;
 import com.ECommerceApp.ECommerceApp.model.Product;
-import com.ECommerceApp.ECommerceApp.repository.CartRepository;
-import com.ECommerceApp.ECommerceApp.repository.CustomerRepository;
-import com.ECommerceApp.ECommerceApp.repository.ProductRepository;
-import com.ECommerceApp.ECommerceApp.response.GenericResponse;
 import com.ECommerceApp.ECommerceApp.service.CategoryService;
 import com.ECommerceApp.ECommerceApp.service.ProductServiceImpl;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,11 +13,10 @@ import java.util.List;
 @RequestMapping("api/")
 public class ProductController {
 
-
     private final ProductServiceImpl productServiceImpl;
     private final CategoryService categoryService;
 
-    ProductController (ProductServiceImpl productServiceImpl, CartRepository cartRepository, CustomerRepository customerRepository, ProductRepository productRepository, CategoryService categoryService) {
+    ProductController (ProductServiceImpl productServiceImpl, CategoryService categoryService) {
         this.productServiceImpl = productServiceImpl;
         this.categoryService = categoryService;
     }

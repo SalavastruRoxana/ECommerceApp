@@ -12,12 +12,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CartServiceImpl implements CartService {
-    private final CartRepository cartRepository;
     private final ProductRepository productRepository;
     private final CustomerRepository customerRepository;
 
-    public CartServiceImpl(CartRepository cartRepository, ProductRepository productRepository, CustomerRepository customerRepository) {
-        this.cartRepository = cartRepository;
+    public CartServiceImpl(ProductRepository productRepository, CustomerRepository customerRepository) {
         this.productRepository = productRepository;
         this.customerRepository = customerRepository;
     }

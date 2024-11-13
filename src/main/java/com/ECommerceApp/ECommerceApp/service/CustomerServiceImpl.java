@@ -2,10 +2,7 @@ package com.ECommerceApp.ECommerceApp.service;
 
 import com.ECommerceApp.ECommerceApp.model.Cart;
 import com.ECommerceApp.ECommerceApp.model.Customer;
-import com.ECommerceApp.ECommerceApp.model.Order;
-import com.ECommerceApp.ECommerceApp.model.Shipment;
 import com.ECommerceApp.ECommerceApp.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

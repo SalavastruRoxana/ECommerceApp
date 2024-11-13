@@ -6,7 +6,6 @@ import com.ECommerceApp.ECommerceApp.dto.LoginDTO;
 import com.ECommerceApp.ECommerceApp.model.Cart;
 import com.ECommerceApp.ECommerceApp.model.Customer;
 import com.ECommerceApp.ECommerceApp.model.UserRole;
-import com.ECommerceApp.ECommerceApp.repository.CartRepository;
 import com.ECommerceApp.ECommerceApp.repository.CustomerRepository;
 import com.ECommerceApp.ECommerceApp.repository.RoleRepository;
 import com.ECommerceApp.ECommerceApp.security.JWTGenerator;
