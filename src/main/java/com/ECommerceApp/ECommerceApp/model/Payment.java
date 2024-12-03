@@ -20,9 +20,9 @@ public class Payment {
     @Column(name = "ID", nullable = false, unique = true, updatable = false)
     private int id;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "payment")
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
-    private Order order = new Order();
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "payment")
+//    @JoinColumn(name = "order_id", referencedColumnName = "id")
+//    private Order order = new Order();
 
     @Column(name = "payment_date", nullable = false,  updatable = true)
     private Date paymentDate;

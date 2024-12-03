@@ -1,12 +1,18 @@
 package com.ECommerceApp.ECommerceApp.controller;
 import com.ECommerceApp.ECommerceApp.exception.CustomerNotFoundException;
 import com.ECommerceApp.ECommerceApp.model.Customer;
+import com.ECommerceApp.ECommerceApp.model.Order;
 import com.ECommerceApp.ECommerceApp.response.GenericResponse;
 import com.ECommerceApp.ECommerceApp.service.CustomerService;
 import com.ECommerceApp.ECommerceApp.service.CustomerServiceImpl;
+import com.ECommerceApp.ECommerceApp.service.OrderServiceImpl;
 import com.ECommerceApp.ECommerceApp.util.CustomerConcreteDecorator;
 import com.ECommerceApp.ECommerceApp.util.CustomerDecorator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -17,11 +23,15 @@ import java.util.List;
 @RequestMapping("api/")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    @Autowired
+    private  CustomerServiceImpl customerService;
 
-    CustomerController(CustomerServiceImpl customerService) {
-        this.customerService = customerService;
-    }
+    @Autowired
+    private OrderServiceImpl orderService;
+
+//    CustomerController(CustomerServiceImpl customerService) {
+//        this.customerService = customerService;
+//    }
 
     
 
@@ -52,6 +62,15 @@ public class CustomerController {
         customerConcreteDecorator.patchCustomer(customer, currentCustomer);
         customerService.updateCustomer(currentCustomer);
         return GenericResponse.success(currentCustomer, "Customer updated successfully");
+    }
+
+    @GetMapping("/placeOrder")
+    public  GenericResponse<Order> placeOrder(){
+        Authentication authenticationToken = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)authenticationToken.getPrincipal();
+        //use customer service
+        Order order = orderService.createOrder(user);// TODO: treat the exception customer not found
+        return GenericResponse.success(order, "Order placed succesfully");
     }
 
 }

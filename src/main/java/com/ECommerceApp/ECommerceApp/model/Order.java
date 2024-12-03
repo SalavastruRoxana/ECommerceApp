@@ -1,5 +1,6 @@
 package com.ECommerceApp.ECommerceApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,12 +26,13 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY)// not to load all orders when I want to get only the customer
     @JoinColumn(name = "customer_id", referencedColumnName = "id") //maybe without referenced column
+    @JsonIgnore
     private Customer customer;
 
     @Column(name = "DATE", unique = true, updatable = false)
     private Date date;
 
     @Column(name = "PRICE", nullable = false, unique = true, updatable = false)
-    private int price;
+    private Float price;
 
 }

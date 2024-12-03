@@ -1,12 +1,11 @@
 package com.ECommerceApp.ECommerceApp.controller;
 
-import com.ECommerceApp.ECommerceApp.controller.ProductController;
 import com.ECommerceApp.ECommerceApp.model.Category;
 import com.ECommerceApp.ECommerceApp.model.Product;
 import com.ECommerceApp.ECommerceApp.service.CategoryService;
 import com.ECommerceApp.ECommerceApp.service.ProductServiceImpl;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -23,11 +22,6 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 @WebMvcTest(ProductController.class)
-//@AutoConfigureMockMvc
-//@SpringBootTest(classes = ProductController.class)
-//@SpringBootTest
-//@AutoConfigureMockMvc
-//@ContextConfiguration(classes = ProductController.class)
 @ExtendWith(SpringExtension.class)
 public class ProductControllerTest {
 
@@ -47,7 +41,6 @@ public class ProductControllerTest {
 
     @BeforeEach
     void setUp() {
-        //MockitoAnnotations.openMocks(this);
         product = new Product();
         category = new Category();
         category.setId(1);

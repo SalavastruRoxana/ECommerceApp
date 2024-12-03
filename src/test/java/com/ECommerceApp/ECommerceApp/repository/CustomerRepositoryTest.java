@@ -1,24 +1,18 @@
 package com.ECommerceApp.ECommerceApp.repository;
 
-import com.ECommerceApp.ECommerceApp.ECommerceAppApplication;
 import com.ECommerceApp.ECommerceApp.model.Customer;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 //@SpringBootTest(classes = ECommerceAppApplication.class) // or ECommerceApp, or controller
 //@ExtendWith(MockitoExtension.class)
-@RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2) // in memory db
 public class CustomerRepositoryTest {
@@ -50,7 +44,7 @@ public class CustomerRepositoryTest {
 
         Customer savedCustomer = customerRepository.save(customer);
 
-        Integer customerId = savedCustomer.getId();
+        Integer customerId =  savedCustomer.getId();
         Customer receivedCustomer = customerRepository.findById(customerId);
 
         assertThat(savedCustomer).isNotNull();

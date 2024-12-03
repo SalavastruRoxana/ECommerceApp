@@ -6,8 +6,8 @@ import com.ECommerceApp.ECommerceApp.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
-public class CustomerServiceImpl implements CustomerService {
+@Service("CustomerImpl")
+public class CustomerServiceImpl  {
 
     private final CustomerRepository customerRepository;
     private final CartRepository cartRepository;
@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
         this.shipmentRepository = shipmentRepository;
     }
 
-    @Override
+    //@Override
     public Customer createCustomer(Customer customer) {
         Customer customer1 = this.customerRepository.save(customer);
         Cart cart = new Cart();
@@ -36,12 +36,12 @@ public class CustomerServiceImpl implements CustomerService {
         return customer1;
     }
 
-    @Override
+    //@Override
     public Customer getCustomer(String customerId) {
         return this.customerRepository.findById(Integer.parseInt(customerId));
     }
 
-    @Override
+    //@Override
     public List<Customer> getCustomers() {
         return List.of();
     }
@@ -51,12 +51,12 @@ public class CustomerServiceImpl implements CustomerService {
 //        return this.customerRepository.findByCredentials(customerUsername, customerPassword);
 //    }
 
-    @Override
+    //@Override
     public void deleteCustomer(String customerId) {
 
     }
 
-    @Override
+    //@Override
     public void updateCustomer(Customer customer) {
         this.customerRepository.save(customer);
     }

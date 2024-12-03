@@ -41,18 +41,12 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.springframework:spring-test")
+	//testImplementation("org.springframework:spring-test")
 
 	//new
-	testImplementation("com.h2database:h2:2.3.230")
+	testImplementation("com.h2database:h2")//:2.3.230
+	testImplementation("org.junit.jupiter:junit-jupiter-api")//:5.8.1
 
-
-
-
-	//old
-	testImplementation ("org.testcontainers:testcontainers:1.19.7")
-	testImplementation ("org.testcontainers:mysql")
-	testImplementation ("org.testcontainers:junit-jupiter")
 
 }
 
