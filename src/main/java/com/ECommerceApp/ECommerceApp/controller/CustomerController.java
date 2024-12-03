@@ -23,6 +23,7 @@ import java.util.List;
 @RequestMapping("api/")
 public class CustomerController {
 
+    //TODO: make them private final?
     @Autowired
     private  CustomerServiceImpl customerService;
 
@@ -64,12 +65,11 @@ public class CustomerController {
         return GenericResponse.success(currentCustomer, "Customer updated successfully");
     }
 
+    //TODO: move it in order controller
     @GetMapping("/placeOrder")
     public  GenericResponse<Order> placeOrder(){
-        Authentication authenticationToken = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User)authenticationToken.getPrincipal();
-        //use customer service
-        Order order = orderService.createOrder(user);// TODO: treat the exception customer not found
+        Customer customer = customerService.getCustomerFromContext();
+        Order order = orderService.createOrder(customer);// TODO: treat the exception customer null
         return GenericResponse.success(order, "Order placed succesfully");
     }
 

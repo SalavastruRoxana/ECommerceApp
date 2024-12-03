@@ -15,15 +15,11 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    private final CustomerRepository customerRepository;
-    private final PaymentRepository paymentRepository;
-    //inject payment service
-    //inject customer service, delete customerRepository.findByEmail
+    private final PaymentService paymentService;
 
-    public OrderServiceImpl(OrderRepository orderRepository, CustomerRepository customerRepository, PaymentRepository paymentRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, PaymentService paymentService) {
         this.orderRepository = orderRepository;
-        this.customerRepository = customerRepository;
-        this.paymentRepository = paymentRepository;
+        this.paymentService = paymentService;
     }
 
 
@@ -31,29 +27,17 @@ public class OrderServiceImpl implements OrderService {
     // TODO add products in order
     // delete what is in cart
     @Override
-    public Order createOrder(User user) {
-        Customer cus = customerRepository.findByEmail( user.getUsername()).orElse(null);
+    public Order createOrder(Customer customer) {
+        //Customer cus = customerRepository.findByEmail( user.getUsername()).orElse(null);
         Order order = new Order();
 
-        if (cus != null)
-        {
-            order.setCustomer(cus);
-            Cart cart = cus.getCart();
-            order.setDate(Date.valueOf(LocalDate.now()));
-            order.setPrice(this.getPrice(cart));
-            Payment payment = new Payment();
-            //payment.setOrder(order);
-            payment.setPaymentDate(Date.valueOf(LocalDate.now()));
-            payment.setAmount(this.getPrice(cart));
-            payment.setPaymentMethod("Card");
+        order.setCustomer(customer);
+        Cart cart = customer.getCart();
+        order.setDate(Date.valueOf(LocalDate.now()));
+        order.setPrice(this.getPrice(cart));
 
-            order.setPayment(payment);
-
-            paymentRepository.save(payment);
-            orderRepository.save(order);
-        }
-        else
-            throw new CustomerNotFoundException();
+        order.setPayment(paymentService.createPayment(this.getPrice(cart)));
+        orderRepository.save(order);
 
         return order;
     }

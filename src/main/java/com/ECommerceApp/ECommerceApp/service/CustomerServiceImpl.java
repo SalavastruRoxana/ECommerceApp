@@ -3,6 +3,9 @@ package com.ECommerceApp.ECommerceApp.service;
 import com.ECommerceApp.ECommerceApp.model.Cart;
 import com.ECommerceApp.ECommerceApp.model.Customer;
 import com.ECommerceApp.ECommerceApp.repository.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,6 +50,8 @@ public class CustomerServiceImpl  {
     }
 
 
+
+
 //    public Customer loginCustomer(String customerUsername, String customerPassword) {
 //        return this.customerRepository.findByCredentials(customerUsername, customerPassword);
 //    }
@@ -59,5 +64,11 @@ public class CustomerServiceImpl  {
     //@Override
     public void updateCustomer(Customer customer) {
         this.customerRepository.save(customer);
+    }
+
+    public Customer getCustomerFromContext() {
+        Authentication authenticationToken = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)authenticationToken.getPrincipal();
+        return customerRepository.findByEmail(user.getUsername()).orElse(null);
     }
 }
