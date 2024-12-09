@@ -25,17 +25,21 @@ public class Customer {
 
     //@JsonIgnore // might be needed if infinite recursion happens
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Shipment> shipments;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    @JsonIgnore
     private List<UserRole> userRoles;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Order> orders;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Cart cart;
 
     @Column(name = "FirstName", nullable = false, length = 50, updatable = true)

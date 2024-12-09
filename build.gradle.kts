@@ -31,6 +31,9 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-api")
 	implementation("io.jsonwebtoken:jjwt:0.12.6")
 	implementation ("org.springframework:spring-webmvc")
+	implementation ("org.springframework.boot:spring-boot-starter-mail")
+	implementation("org.springframework.integration:spring-integration-mail")
+
 
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl")

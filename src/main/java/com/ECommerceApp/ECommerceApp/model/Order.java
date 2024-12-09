@@ -29,10 +29,10 @@ public class Order {
     @JsonIgnore
     private Customer customer;
 
-    @Column(name = "DATE", unique = true, updatable = false)
+    @Column(name = "DATE", unique = false, updatable = false)
     private Date date;
 
-    @Column(name = "PRICE", nullable = false, unique = true, updatable = false)
+    @Column(name = "PRICE", nullable = false, unique = false, updatable = true)
     private Float price;
 
 }

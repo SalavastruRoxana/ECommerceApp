@@ -65,12 +65,6 @@ public class CustomerController {
         return GenericResponse.success(currentCustomer, "Customer updated successfully");
     }
 
-    //TODO: move it in order controller
-    @GetMapping("/placeOrder")
-    public  GenericResponse<Order> placeOrder(){
-        Customer customer = customerService.getCustomerFromContext();
-        Order order = orderService.createOrder(customer);// TODO: treat the exception customer null
-        return GenericResponse.success(order, "Order placed succesfully");
-    }
+
 
 }
