@@ -31,7 +31,7 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-api")
 	implementation("io.jsonwebtoken:jjwt:0.12.6")
 	implementation ("org.springframework:spring-webmvc")
-	implementation ("org.springframework.boot:spring-boot-starter-mail")
+	implementation ("org.springframework.boot:spring-boot-starter-mail:3.4.0")
 	implementation("org.springframework.integration:spring-integration-mail")
 
 

@@ -6,8 +6,7 @@ import com.ECommerceApp.ECommerceApp.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-//import org.springframework.mail.SimpleMailMessage;
-
+//import org.springframework.mail.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +52,11 @@ public class BackgroundTasksScheduler {
         }
     }
 
+    //TODO: Check mail
+    // EMAIL_PATTERN = "^[_A-Za-z0-9-+]+
+    //        (.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*
+    //        (.[A-Za-z]{2,})$"
+    // Pattern.compile and matcher
     private void sendMail(Customer customer, Product product) {
         String recipientAddress = customer.getEmail();
         String subject = "Product back in stock";
